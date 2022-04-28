@@ -11,21 +11,30 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  email String
+  email  String @unique
   password String
 
   first_name String
   last_name String
+
+  @@map("users")
+  posts Post[]
 }
 
 model Post {
-  id Int @id @default(autoincrement())
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   title String
   description String?
+
+  user_id String @db.Uuid
+
+  user User @relation(fields: [user_id], references: [id])
+
+  @@map("posts")
 }
