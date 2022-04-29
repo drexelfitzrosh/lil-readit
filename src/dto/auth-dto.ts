@@ -7,6 +7,15 @@ export class AuthLoginDto {
   @IsNotEmpty()
   @IsString()
   password: string;
+}
+
+export class AuthSignInDto {
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+  @IsNotEmpty()
+  @IsString()
+  password: string;
   @IsNotEmpty()
   @IsString()
   firstName: string;
