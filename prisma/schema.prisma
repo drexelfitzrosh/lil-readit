@@ -34,7 +34,7 @@ model Post {
 
   user_id String @db.Uuid
 
-  user User @relation(fields: [user_id], references: [id])
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("posts")
 }
